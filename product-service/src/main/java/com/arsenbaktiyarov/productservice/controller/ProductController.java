@@ -31,7 +31,16 @@ public class ProductController {
                 .productId(UUID.randomUUID().toString())
                 .build();
 
-        return commandGateway.sendAndWait(createProductCommand);
+        String returnedValue;
+        
+        try {
+            returnedValue = commandGateway.sendAndWait(createProductCommand);
+        } catch (Exception e) {
+            returnedValue = e.getLocalizedMessage();
+        }
+
+        return returnedValue;
+
     }
 
     @GetMapping

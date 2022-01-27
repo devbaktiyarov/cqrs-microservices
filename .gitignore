@@ -12,6 +12,7 @@ target/
 .settings
 .springBeans
 .sts4-cache
+AxonServer-4.5.10
 
 ### IntelliJ IDEA ###
 .idea
