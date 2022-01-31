@@ -15,7 +15,7 @@ public class ProductEntity implements Serializable {
     private static final long serialVersionUID = -4095330650806019086L;
 
     @Id
-//    @Column(unique = true)
+    @Column(unique = true)
     private String productId;
 
     @Column(unique = true)
