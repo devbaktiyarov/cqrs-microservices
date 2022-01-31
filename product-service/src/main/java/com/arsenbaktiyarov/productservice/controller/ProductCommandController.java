@@ -10,12 +10,12 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/products")
-public class ProductController {
+public class ProductCommandController {
 
     private final Environment environment;
     private final CommandGateway commandGateway;
 
-    public ProductController(Environment environment, CommandGateway commandGateway) {
+    public ProductCommandController(Environment environment, CommandGateway commandGateway) {
         this.environment = environment;
         this.commandGateway = commandGateway;
     }
@@ -41,11 +41,6 @@ public class ProductController {
 
         return returnedValue;
 
-    }
-
-    @GetMapping
-    public String getProduct() {
-        return "HTTP GET handled";
     }
 
     @PutMapping
