@@ -23,7 +23,7 @@ public class ProductCommandController {
 
     @PostMapping
     public String createProduct(@Valid @RequestBody Product product) {
-
+        environment.getProperty("server.port");
         CreateProductCommand createProductCommand
                 = CreateProductCommand.builder()
                 .title(product.getTitle())
@@ -33,13 +33,7 @@ public class ProductCommandController {
                 .build();
 
         String returnedValue;
-        
-        try {
-            returnedValue = commandGateway.sendAndWait(createProductCommand);
-        } catch (Exception e) {
-            returnedValue = e.getLocalizedMessage();
-        }
-
+        returnedValue = commandGateway.sendAndWait(createProductCommand);
         return returnedValue;
 
     }
