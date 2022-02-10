@@ -1,5 +1,6 @@
 package com.arsenbaktiyarov.orderservice.command;
 
+import com.arsenbaktiyarov.orderservice.event.OrderApprovedEvent;
 import com.arsenbaktiyarov.orderservice.event.OrderCreatedEvent;
 import com.arsenbaktiyarov.orderservice.model.OrderStatus;
 import org.axonframework.commandhandling.CommandHandler;
@@ -41,4 +42,17 @@ public class OrderAggregate {
         this.addressId = orderCreatedEvent.getAddressId();
         this.orderStatus = orderCreatedEvent.getOrderStatus();
     }
+
+    @CommandHandler
+    public void handle(ApproveOrderCommand approveOrderCommand) {
+        OrderApprovedEvent orderApprovedEvent =
+                new OrderApprovedEvent(approveOrderCommand.getOrderId());
+        AggregateLifecycle.apply(orderApprovedEvent);
+    }
+
+    @EventSourcingHandler
+    protected void on(OrderApprovedEvent orderApprovedEvent) {
+        this.orderStatus = orderApprovedEvent.getOrderStatus();
+    }
+
 }

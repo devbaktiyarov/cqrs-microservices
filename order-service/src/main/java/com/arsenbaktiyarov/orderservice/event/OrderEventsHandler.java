@@ -23,4 +23,14 @@ public class OrderEventsHandler {
         orderRepository.save(orderEntity);
         log.info("Order saved " + orderEntity.getOrderId());
     }
+
+    @EventHandler
+    public void on(OrderApprovedEvent orderApprovedEvent) {
+        OrderEntity orderEntity = orderRepository.findByOrderId(orderApprovedEvent.getOrderId());
+        if (orderEntity == null) {
+            return;
+        }
+        orderEntity.setOrderStatus(orderApprovedEvent.getOrderStatus());
+        orderRepository.save(orderEntity);
+    }
 }
